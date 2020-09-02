@@ -8,28 +8,32 @@ import CartItem from '../cart-item/cart-item.component';
 import { selectCartItems } from '../../redux/cart/cart-selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
-import './cart-dropdown.styles.scss'
+import { 
+    CartDrowdown, 
+    CartItems, 
+    EmptyMessage
+} from "./cart-dropdown.styles";
 
 
 const CartDropdown = ({ cartItems, history, dispatch }) => {
     return (
-        <div className='cart-dropdown'>
-            <div className='cart-items' >
+        <CartDrowdown>
+            <CartItems>
                 {
                     cartItems.length ?(
                     cartItems.map(cartItem => (
                     <CartItem key={cartItem.id} item={cartItem} />
                 ))
                 ) : (
-                    <span className='empty-message'>カートは空です</span>
+                    <EmptyMessage>カートは空です</EmptyMessage>
                 )
             }
-            </div>
+            </CartItems>
             <CustomButton onClick={() => {
                 history.push('/checkout');
                 dispatch(toggleCartHidden());
             }}>Checkout</CustomButton>
-        </div>
+        </CartDrowdown>
     )
 }
 

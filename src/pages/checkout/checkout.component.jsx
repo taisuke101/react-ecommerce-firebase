@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector} from 'reselect';
 
 import CheckoutItem from '../../components/checkout-item/checkout-item.component';
-import { selectCartItems, selectCartTotal } from '../../redux/cart/cart-selectors'
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component';
+
+import { selectCartItems, selectCartTotal } from '../../redux/cart/cart-selectors';
 
 import './checkout.styles.scss';
 
@@ -41,6 +43,16 @@ const CheckoutPage = ({cartItems, total}) => {
             <div className='total'>
                 <span>TOTAL: ${total}</span>
             </div>
+            <div className='test-warning'>
+                決済機能のテストには下記のテスト用番号を使用して下さい！
+                <br />
+                カード番号: 4242 4242 4242 4242
+                <br />
+                Exp: 現在より未来の任意の数字
+                <br />
+                CVV: ランダムな三桁の数字
+            </div>
+            <StripeCheckoutButton price={total} />
         </div>
     )
 }
